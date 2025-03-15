@@ -22,7 +22,7 @@ Android SDK & NDK Tools
 Click Install.
 
 ✅ Step 3: Configure Player Settings
-
+Go to Build settings-> Android->Switch Platform.
 Go to File > Build Settings > Player Settings.
 In the Inspector Window, under Other Settings:
 Identification:
@@ -32,8 +32,8 @@ Target API Level: Set it to Highest Installed.
 Scripting Backend: Use IL2CPP (for better performance) or Mono (for smaller APK size, but not recommended for production).
 ARM64 Architecture: Enable this if you want compatibility with modern Android devices.
 Graphics APIs: Make sure OpenGLES3 or Vulkan is selected.
-In the Publishing Settings:
-Set up your Keystore if you want to upload to the Google Play Store.
+
+Check Edit->Preferences->External Tools to see if Android SDK and NDK path is properly configured or not.
 
 
 ✅ Step 4: Vuforia Configuration (Important)
