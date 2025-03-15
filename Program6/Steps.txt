@@ -1,0 +1,55 @@
+To enable vuforia engine in unity
+https://blog.logrocket.com/create-ar-experience-unity-vuforia/
+
+
+For converting to android apk:
+
+✅ Step 1: Switch Platform to Android
+Go to File > Build Settings.
+In the Platform list, select Android.
+Click “Switch Platform”.
+Unity will recompile your project for Android (This may take a while).
+
+✅ Step 2: Install Android Build Support (If Not Installed)
+Open Unity Hub.
+
+Click on the Installs tab.
+Click the three dots (...) next to your Unity version and select “Add Modules”.
+Check the boxes for:
+Android Build Support
+OpenJDK
+Android SDK & NDK Tools
+Click Install.
+
+✅ Step 3: Configure Player Settings
+
+Go to File > Build Settings > Player Settings.
+In the Inspector Window, under Other Settings:
+Identification:
+Set Package Name (e.g., com.yourcompany.yourapp).
+Minimum API Level: Set it to at least Android 7.0 (API Level 24) or higher (depending on your needs).
+Target API Level: Set it to Highest Installed.
+Scripting Backend: Use IL2CPP (for better performance) or Mono (for smaller APK size, but not recommended for production).
+ARM64 Architecture: Enable this if you want compatibility with modern Android devices.
+Graphics APIs: Make sure OpenGLES3 or Vulkan is selected.
+In the Publishing Settings:
+Set up your Keystore if you want to upload to the Google Play Store.
+
+
+✅ Step 4: Vuforia Configuration (Important)
+
+In the Project Window, go to Assets > Vuforia > Configuration.
+Enter your Vuforia License Key.
+Set your desired Max Simultaneous Tracked Images, etc.
+Save Settings.
+
+✅ Step 5: Build the APK
+Go to File > Build Settings.
+Click “Build” (or “Build and Run” if your Android device is connected via USB with Developer Mode enabled).
+Choose a location to save the APK.
+Wait for Unity to build the APK file.
+
+✅ Step 6: Test Your APK
+Copy the APK to your Android device (or deploy directly if using Build and Run).
+Install the APK on your device and open it.
+Test your Vuforia AR app.
