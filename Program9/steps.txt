@@ -1,0 +1,84 @@
+✅ Part 1: Creating Level 1 (Coin Collection & Scoring)
+Step 1: Setup the Scene
+
+Create a new Unity project (3D or 3D URP).
+Save the scene as Level1 (File > Save As).
+
+
+Step 2: Creating the Ground
+
+Hierarchy > Right-click > 3D Object > Terrain.
+Adjust size as needed.
+
+Step 3: Creating the Player (Capsule)
+
+Hierarchy > Right-click > 3D Object > Capsule.
+Rename to Player.
+Position: X = 0, Y = 1, Z = 0 (Above terrain).
+Add Rigidbody component:
+Inspector > Add Component > Rigidbody.
+Tick Is Kinematic.
+
+Step 4: Creating the Coin (Sphere)
+
+Hierarchy > Right-click > 3D Object > Sphere.
+Rename to Coin.
+Position: X = 0, Y = 0.5, Z = 5 (Above terrain).
+Add Sphere Collider component:
+Tick Is Trigger.
+Tag the Coin:
+Inspector > Tag > Add Tag > + > Coin (Save).
+Set the Coin's tag to Coin.
+
+Step 5: Adding Score Display (Legacy UI Text)
+
+Hierarchy > Right-click > UI > Text.
+Rename to ScoreText.
+Adjust RectTransform position to top-left.
+Set initial text to Score: 0.
+Increase Font Size to around 30 for visibility.
+Make sure there’s a Canvas object in the Hierarchy.
+
+Step 6: Adding Player Controller Script
+
+Create a script called PlayerController.cs and attach it to the Player.
+
+
+✅ Part 2: Level Switching (Using Button)
+Step 7: Creating Level2 Scene
+
+File > New Scene > Basic (Built-in) or New Scene.
+Save as Level2.
+Create a Terrain and basic objects to differentiate it from Level1.
+
+Step 8: Adding Both Scenes to Build Settings
+File > Build Settings.
+Click Add Open Scenes for:
+Level1 (Index 0).
+Level2 (Index 1).
+Click Build if you want to test outside the Unity Editor.
+
+Step 9: Adding Button to Switch Scene
+
+In Level1, Hierarchy > Right-click > UI > Button.
+Rename to NextLevelButton.
+Adjust RectTransform position to be visible.
+Change button text to Next Level.
+
+Step 10: Adding SceneController.cs Script
+
+Create a script called SceneController.cs and attach it to Main Camera or an empty GameObject.
+
+Step 11: Linking Button to SceneController
+
+Click NextLevelButton in Hierarchy.
+In Inspector > Button (Script) > On Click(), click +.
+Drag Main Camera (or GameObject with SceneController.cs) to Object field.
+Select SceneController > LoadNextScene.
+
+Step 12: Testing Everything
+
+Click Play.
+Move Capsule with WASD / Arrow Keys.
+Touch Coin to increase score.
+Click Next Level button to switch to Level2.
