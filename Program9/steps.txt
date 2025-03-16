@@ -30,7 +30,7 @@ Tag the Coin:
 Inspector > Tag > Add Tag > + > Coin (Save).
 Set the Coin's tag to Coin.
 
-Step 5: Adding Score Display (Legacy UI Text)
+Step 5: Adding Score Display (Legacy UI Text) and Similarly Timer Text (for example Timer: 30 )
 
 Hierarchy > Right-click > UI > Text.
 Rename to ScoreText.
@@ -44,7 +44,7 @@ Step 6: Adding Player Controller Script
 Create a script called PlayerController.cs and attach it to the Player.
 
 
-✅ Part 2: Level Switching (Using Button)
+✅ Part 2: Level Switching
 Step 7: Creating Level2 Scene
 
 File > New Scene > Basic (Built-in) or New Scene.
@@ -57,6 +57,8 @@ Click Add Open Scenes for:
 Level1 (Index 0).
 Level2 (Index 1).
 Click Build if you want to test outside the Unity Editor.
+
+// The below steps (9,10 and 11) is not required as player goes automatically to level 2 if the player collects 4 coins. The level changing is included in the PlayerControllerScript. 
 
 Step 9: Adding Button to Switch Scene
 
