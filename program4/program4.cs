@@ -1,30 +1,28 @@
 using UnityEngine;
 
-public class move : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public float moveSpeed;
-    public float rotationSpeed;
+public class FPSPlayerController : MonoBehaviour{
+    public float speed = 5f; // Movement speed
+    public float rotationSpeed = 100f; // Rotation speed
+
+    private CharacterController controller;
 
     void Start()
     {
-        moveSpeed = 15f;
-        rotationSpeed = 100f;
+        controller = GetComponent<CharacterController>(); // Get the Character Controller
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float moveX = Input.GetAxis("Horizontal");
-        float moveY = Input.GetAxis("Vertical");
+        // Get movement input (Forward/Backward & Left/Right)
+        float moveZ = Input.GetAxis("Vertical");  // W & S for forward/backward
+        float moveX = Input.GetAxis("Horizontal"); // A & D for left/right
 
-        Vector3 move = (Vector3.right * moveX + Vector3.forward * moveY) * moveSpeed * Time.deltaTime;
-        transform.Translate(move);
+        // Move the player based on input
+        Vector3 move = transform.forward * moveZ + transform.right * moveX;
+        controller.Move(move * speed * Time.deltaTime);
 
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
-
-        transform.Rotate(Vector3.up, mouseX * rotationSpeed * Time.deltaTime, Space.World);
-        transform.Rotate(Vector3.right, -mouseY * rotationSpeed * Time.deltaTime, Space.World);
+        // Rotate Left/Right using A & D
+        float rotation = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
+        transform.Rotate(0, rotation, 0);
     }
 }
