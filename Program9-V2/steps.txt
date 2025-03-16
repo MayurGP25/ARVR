@@ -1,0 +1,165 @@
+🚀 Complete Process: Multiplayer VR Game in Unity
+This guide will walk you through the entire process of developing a third-person multiplayer VR game in Unity. The game involves collecting cubes, keeping track of score, time, and chances, and transitioning between levels.
+
+🛠 Step 1: Create a New Unity Project
+Open Unity Hub → Click New Project → Select 3D Core → Name the project.
+In the Hierarchy, delete the default Main Camera (we will use a new one later).
+🎭 Step 2: Add a Third-Person Player Character
+Go to Asset Store (Window > Asset Store) and import a third-person character model.
+If using a basic character, create a Capsule (GameObject > 3D Object > Capsule).
+Attach a Character Controller component to the capsule.
+Add a Rigidbody (uncheck Use Gravity if needed).
+Move the Main Camera behind the player to follow them.
+Tag the player as "Player".
+🟦 Step 3: Create Collectible Cubes
+Go to Hierarchy → Create Cube (GameObject > 3D Object > Cube).
+Resize and position the cube where the player can collect it.
+Assign a material to the cube (Assets > Create > Material).
+Duplicate (Ctrl + D) the cube and spread them across the scene.
+📜 Step 4: Write the Score & Timer Script
+Create an empty GameObject in the Hierarchy, rename it GameManager.
+Create a C# script called GameManager.cs and attach it to GameManager.
+Add the following script to track score, time, and chances:
+csharp
+Copy
+Edit
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+public class GameManager : MonoBehaviour
+{
+    public Text scoreText;
+    public Text timerText;
+    public int totalCubes = 5;
+    public float levelTime = 30f;
+    public int maxChances = 3;
+
+    private int score = 0;
+    private float timer;
+    private int chances;
+
+    void Start()
+    {
+        timer = levelTime;
+        chances = maxChances;
+        UpdateUI();
+    }
+
+    void Update()
+    {
+        timer -= Time.deltaTime;
+        if (timer <= 0)
+        {
+            EndLevel();
+        }
+        UpdateUI();
+    }
+
+    public void CollectCube(GameObject cube)
+    {
+        score += 10;
+        Destroy(cube);
+        totalCubes--;
+
+        if (totalCubes == 0)
+        {
+            LoadNextLevel();
+        }
+        UpdateUI();
+    }
+
+    void UpdateUI()
+    {
+        scoreText.text = "Score: " + score;
+        timerText.text = "Time Left: " + Mathf.Ceil(timer);
+    }
+
+    void EndLevel()
+    {
+        chances--;
+        if (chances > 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        else
+        {
+            Debug.Log("Game Over!");
+        }
+    }
+
+    void LoadNextLevel()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            SceneManager.LoadScene(1);
+        }
+        else
+        {
+            Debug.Log("You Won!");
+        }
+    }
+}
+🔵 Step 5: Enable Cube Collection
+Create another C# script called CubeCollect.cs.
+Attach this script to all cubes to allow collection:
+csharp
+Copy
+Edit
+using UnityEngine;
+
+public class CubeCollect : MonoBehaviour
+{
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            FindObjectOfType<GameManager>().CollectCube(gameObject);
+        }
+    }
+}
+Set the Player's tag to "Player".
+On each cube, enable Box Collider > Is Trigger.
+📌 Step 6: Add UI for Score & Timer
+Create a Canvas (GameObject > UI > Canvas).
+Inside the Canvas, create two TextMeshPro - Text objects:
+Rename one to scoreText and the other to timerText.
+Place them at the top of the screen.
+Assign these Text components to the GameManager script.
+🌍 Step 7: Set Up Multiplayer (Optional)
+Install Photon PUN from Package Manager (Window > Package Manager).
+Follow Photon’s setup to create a Multiplayer room.
+Sync player movement and object interactions using Photon scripts.
+🔄 Step 8: Set Up Level Transitions
+Open File > Build Settings.
+Click Add Open Scenes to include your current scene (Level1).
+Duplicate the scene for Level2:
+Go to Assets/Scenes → Right-click Level1 → Duplicate → Rename it to Level2.
+Modify GameManager.cs to switch between Level1 and Level2.
+🛠 Step 9: Prevent Duplicate Players in Levels
+If using multiple scenes, make sure there's only one player:
+
+Use this Persistent Player script:
+csharp
+Copy
+Edit
+using UnityEngine;
+
+public class PersistentPlayer : MonoBehaviour
+{
+    private static PersistentPlayer instance;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+}
+Attach this script only in Level1, and remove extra players from Level2.
