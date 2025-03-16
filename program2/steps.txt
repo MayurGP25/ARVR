@@ -8,8 +8,11 @@ In Assets, create a C# Script (ChangeAppearance).
 Attach ChangeAppearance script to Controller.
 In Assets, create 3 Materials (newCubeMaterial, newSphereMaterial, newPlaneMaterial).
 Create 3 Textures (newCubeTexture, newSphereTexture, newPlaneTexture).
-In Inspector, assign:
+In Inspector for controller object , assign:
 cube, sphere, plane to the script.
 newCubeMaterial, newSphereMaterial, newPlaneMaterial.
 newCubeTexture, newSphereTexture, newPlaneTexture.
+
+modify on click method for all 3 buttons and assign the controller (cube, sphere and plane buttons and select appropriate change function)
+
 Click Play to see the color, material, and texture changes
