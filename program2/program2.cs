@@ -1,38 +1,43 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Program2 : MonoBehaviour
+public class ChangeAppearance : MonoBehaviour
 {
-    public GameObject cube;
-    public GameObject sphere;
-    public GameObject plane;
-    public Material newMaterial;
-    public Texture newTexture;
+    public GameObject cube, sphere, plane;  
+    public Material cubeMaterial, sphereMaterial, planeMaterial;
+    public Material cubeTexture, sphereTexture, planeTexture;
 
-    public Button cubeButton;
-    public Button sphereButton;
-    public Button planeButton;
+    private bool isCubeMaterial = true;
+    private bool isSphereMaterial = false;
+    private bool isPlaneMaterial = true;
 
-    void Start()
+    public void ChangeCubeAppearance()
     {
-        cubeButton.onClick.AddListener(ChangeCubeMaterial);
-        sphereButton.onClick.AddListener(ChangeSphereTexture);
-        planeButton.onClick.AddListener(ChangePlaneMaterial);
+        if (isCubeMaterial)
+            cube.GetComponent<Renderer>().material = cubeTexture;
+        else
+            cube.GetComponent<Renderer>().material = cubeMaterial;
+
+        isCubeMaterial = !isCubeMaterial;
     }
 
-    void ChangeCubeMaterial()
+    public void ChangeSphereAppearance()
     {
-        cube.GetComponent<Renderer>().material = newMaterial;
+        if (isSphereMaterial)
+            sphere.GetComponent<Renderer>().material = sphereTexture;
+        else
+            sphere.GetComponent<Renderer>().material = sphereMaterial;
+
+        isSphereMaterial = !isSphereMaterial;
     }
 
-    void ChangeSphereTexture()
+    public void ChangePlaneAppearance()
     {
-        sphere.GetComponent<Renderer>().material.mainTexture = newTexture;
-    }
+        if (isPlaneMaterial)
+            plane.GetComponent<Renderer>().material = planeTexture;
+        else
+            plane.GetComponent<Renderer>().material = planeMaterial;
 
-    void ChangePlaneMaterial()
-    {
-        plane.GetComponent<Renderer>().material = newMaterial;
-        plane.GetComponent<Renderer>().material.mainTexture = newTexture;
+        isPlaneMaterial = !isPlaneMaterial;
     }
 }
