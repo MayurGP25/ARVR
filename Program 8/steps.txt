@@ -84,21 +84,25 @@ Sure! Here’s a *detailed and simple step-by-step guide* for adding a custom an
    using UnityEngine;
    using UnityEngine.UI;
 
-   public class JumpButtonScript : MonoBehaviour
-   {
-       public Animator unityChanAnimator;
-       public Button jumpButton;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-       void Start()
-       {
-           jumpButton.onClick.AddListener(PlayJumpAnimation);
-       }
+public class program8 : MonoBehaviour
 
-       void PlayJumpAnimation()
-       {
-           unityChanAnimator.SetTrigger("JumpTrigger");
-       }
-   }
+{
+    private Animator anim;
+    
+    public void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
+    public void PlayJumpAnimation()
+    {
+        anim.SetTrigger("Jump"); 
+    }
+}
    
 
 5. *Save the script* (Ctrl + S or Cmd + S).
